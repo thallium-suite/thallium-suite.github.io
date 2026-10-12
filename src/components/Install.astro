@@ -36,7 +36,9 @@ import Button from './Button.astro';
     <span class="c-flag">bs=4M</span>
 
 <span class="c-dim"># build your own on top of one</span>
-<span class="c-prompt">$</span> <span class="c-cmd">podman</span> build Containerfile
+<span class="c-prompt">$</span> <span class="c-cmd">podman</span> build \
+    <span class="c-flag">-t</span> my-image \
+    <span class="c-flag">-f</span> Containerfile .
 
 <span class="c-dim"># roll back, any time, from the bootloader</span>
 <span class="c-prompt">$</span> <span class="c-cmd">sudo</span> bootc rollback</code></pre>

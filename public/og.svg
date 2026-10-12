@@ -4,6 +4,17 @@
       <stop offset="0" stop-color="#0d1626"/>
       <stop offset="1" stop-color="#16223a"/>
     </linearGradient>
+    <radialGradient id="logoGrad1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(36.846234721113085 0.0 0.0 36.846234721113085 0.0 0.0)" spreadMethod="pad" cx="0.0" cy="0.0" fx="0.0" fy="0.0" r="36.84623336791992">
+      <stop offset="0.0" stop-color="#999999"/>
+      <stop offset="0.5" stop-color="#999999"/>
+      <stop offset="1.0" stop-color="#cccccc"/>
+    </radialGradient>
+    <radialGradient id="logoGrad2" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.0 31.113730448805793 -31.113730448805793 0.0 0.0 0.0)" spreadMethod="pad" cx="26.846896034809415" cy="-30.854596713464506" fx="26.846896034809415" fy="-30.854596713464506" r="31.113731384277344">
+      <stop offset="0.0" stop-color="#4a86e8"/>
+      <stop offset="0.5" stop-color="#4a86e8"/>
+      <stop offset="0.75" stop-color="#4a86e8"/>
+      <stop offset="1.0" stop-color="#6d9eeb"/>
+    </radialGradient>
   </defs>
 
   <rect width="1200" height="630" fill="url(#bg)"/>
@@ -12,6 +23,18 @@
   <g stroke="#25334f" stroke-width="1" opacity=".5">
     <path d="M0 126h1200M0 252h1200M0 378h1200M0 504h1200"/>
     <path d="M200 0v630M400 0v630M600 0v630M800 0v630M1000 0v630"/>
+  </g>
+
+  <!-- new logo, top-left -->
+  <g transform="translate(72 96) scale(0.08333)">
+    <rect width="960" height="960" fill="url(#logoGrad1)"/>
+    <path fill="#ffffff" d="m9.189228 38.25747c0 -16.055395 13.0154705 -29.070866 29.070866 -29.070866c7.7100754 0 15.1043625 3.0628147 20.556206 8.51466c5.4518433 5.451845 8.514664 12.846134 8.514664 20.556206c0 16.055397 -13.015472 29.07087 -29.07087 29.07087c-16.055395 0 -29.070866 -13.015472 -29.070866 -29.07087z"/>
+    <path fill="#ffffff" d="m9.189228 78.188736c0 -16.055397 13.0154705 -29.070866 29.070866 -29.070866c7.7100754 0 15.1043625 3.0628128 20.556206 8.51466c5.4518433 5.4518433 8.514664 12.84613 8.514664 20.556206c0 16.055397 -13.015472 29.070862 -29.07087 29.070862c-16.055395 0 -29.070866 -13.015465 -29.070866 -29.070862z"/>
+    <path fill="#ffffff" d="m75.20104 9.186604l22.3937 0l0 98.078735l-22.3937 0z"/>
+    <path fill="#ffffff" d="m252.33145 239.92126l124.6929 0l0 546.07874l-124.6929 0z"/>
+    <path fill="#ffffff" d="m509.88867 239.92126l0 124.6929l-390.4252 0l0 -124.6929z"/>
+    <path fill="#ffffff" d="m582.9745 239.92126l124.69293 0l0 546.07874l-124.69293 0z"/>
+    <path fill="url(#logoGrad2)" d="m960.0016 835.30707l0 124.69293l-960.0 0l0 -124.69293z"/>
   </g>
 
   <!-- card stack motif, right -->
@@ -29,17 +52,7 @@
     </g>
   </g>
 
-  <!-- wordmark -->
-  <g transform="translate(72 96)">
-    <g fill="none" stroke="#1fc9b6" stroke-width="6" stroke-linejoin="round">
-      <path d="M0 -34 34 -14v40L0 46l-34-20v-40L0 -34Z" transform="translate(34 4) scale(.72)"/>
-      <path d="M0 -14 34 6l34-20" transform="translate(34 4) scale(.72)" opacity=".5"/>
-      <path d="M34 6v40" transform="translate(34 4) scale(.72)" opacity=".5"/>
-    </g>
-    <circle cx="34" cy="4" r="9" fill="#ffc83d"/>
-  </g>
-
-  <text x="72" y="252" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="#9aabc9" letter-spacing="1">thallium.tarxz.zip</text>
+  <text x="72" y="252" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="#9aabc9" letter-spacing="1">thallium suite</text>
 
   <g font-family="Helvetica, Arial, sans-serif" font-weight="bold" fill="#f6f4ec">
     <text x="72" y="336" font-size="82" letter-spacing="-2">ATOMIC LINUX,</text>
