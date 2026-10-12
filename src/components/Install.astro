@@ -1,0 +1,146 @@
+---
+import Button from './Button.astro';
+---
+
+<section id="install" class="section container">
+  <div class="panel install">
+    <div class="install-copy">
+      <p class="eyebrow eyebrow-dark">Get started</p>
+      <h2 class="section-title">
+        Pull, write,
+        <br />
+        boot.
+      </h2>
+      <p class="install-lede">
+        Images are plain OCI artifacts. Write one to a USB stick or straight to a disk,
+        and you have a complete, updateable system.
+      </p>
+      <div class="install-actions">
+        <Button href="#faq" variant="blue">
+          Read the FAQ
+        </Button>
+      </div>
+    </div>
+
+    <figure class="terminal">
+      <figcaption class="terminal-bar">
+        <span class="dot dot-coral"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-teal"></span>
+        <span class="terminal-title">bootc — install</span>
+      </figcaption>
+      <pre class="terminal-body"><code><span class="c-dim"># write the installer to a USB stick</span>
+<span class="c-prompt">$</span> <span class="c-cmd">sudo</span> dd \
+    <span class="c-flag">if=uranium.iso</span> \
+    <span class="c-flag">of=/dev/sdb</span> \
+    <span class="c-flag">bs=4M</span>
+
+<span class="c-dim"># build your own on top of one</span>
+<span class="c-prompt">$</span> <span class="c-cmd">podman</span> build Containerfile
+
+<span class="c-dim"># roll back, any time, from the bootloader</span>
+<span class="c-prompt">$</span> <span class="c-cmd">sudo</span> bootc rollback</code></pre>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .install {
+    display: grid;
+    gap: clamp(2rem, 5vw, 3.5rem);
+    padding: clamp(1.75rem, 4vw, 3rem);
+    align-items: center;
+  }
+
+  .eyebrow-dark {
+    color: #5b6b88;
+  }
+
+  .install-copy {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+  }
+
+  .install-lede {
+    font-size: 1.02rem;
+    line-height: 1.6;
+    color: #46587a;
+    max-width: 46ch;
+  }
+
+  /* --- terminal ------------------------------------------------------------ */
+
+  .terminal {
+    margin: 0;
+    background: var(--ink);
+    border: var(--border-on-ink);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-paper-md);
+    overflow: hidden;
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 0.9rem;
+    background: var(--ink-raised);
+    border-bottom: 2px solid var(--ink-line);
+  }
+
+  .dot {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+  }
+
+  .dot-coral {
+    background: var(--coral);
+  }
+  .dot-yellow {
+    background: var(--yellow);
+  }
+  .dot-teal {
+    background: var(--teal);
+  }
+
+  .terminal-title {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  .terminal-body {
+    margin: 0;
+    padding: 1.1rem 1.2rem 1.3rem;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: clamp(0.7rem, 1.7vw, 0.82rem);
+    line-height: 1.75;
+    color: var(--paper);
+    tab-size: 2;
+  }
+
+  .c-dim {
+    color: #5f7395;
+  }
+  .c-prompt {
+    color: var(--teal);
+  }
+  .c-cmd {
+    color: var(--yellow);
+    font-weight: 700;
+  }
+  .c-flag {
+    color: var(--blue);
+  }
+
+  @media (min-width: 900px) {
+    .install {
+      grid-template-columns: 0.85fr 1.15fr;
+    }
+  }
+</style>

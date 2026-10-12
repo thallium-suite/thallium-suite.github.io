@@ -1,0 +1,146 @@
+---
+import Button from './Button.astro';
+import CardStack from './CardStack.astro';
+import { stats } from '../data/site';
+---
+
+<header class="hero">
+  <div class="hero-grid container">
+    <div class="hero-copy">
+      <p class="eyebrow">bootc · ostree · OCI</p>
+      <h1 class="display hero-title">
+        Atomic Linux,
+        <br />
+        <span class="hero-accent">shipped as a container</span>
+      </h1>
+      <p class="lede">
+        Whole desktops built as versioned, bootable container images. Pull one from the
+        registry, write it to disk, boot it. Updates are a snapshot swap — and if it
+        goes wrong, the last working one is one boot away.
+      </p>
+      <div class="hero-actions">
+        <Button href="#images" variant="yellow" size="large">
+          Pull an image
+        </Button>
+        <Button href="#images" variant="outlined" size="large">
+          Browse the catalogue
+        </Button>
+      </div>
+      <p class="hero-note">No installer. No golden image. No cloud account.</p>
+    </div>
+
+    <div class="hero-visual">
+      <CardStack />
+      <p class="hero-hint" aria-hidden="true">
+        drag it around
+      </p>
+    </div>
+  </div>
+
+  <dl class="stats container">
+    {stats.map((s) => (
+      <div class="stat">
+        <dt class="stat-value">{s.value}</dt>
+        <dd class="stat-label">{s.label}</dd>
+      </div>
+    ))}
+  </dl>
+</header>
+
+<style>
+  .hero {
+    padding-block: clamp(2rem, 6vw, 4rem) 0;
+  }
+
+  .hero-grid {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4rem);
+    align-items: center;
+  }
+
+  .hero-title {
+    margin-block: 1.25rem 1.5rem;
+  }
+
+  .hero-accent {
+    color: var(--teal);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-block: 2rem 1.25rem;
+  }
+
+  .hero-note {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  .hero-visual {
+    position: relative;
+  }
+
+  .hero-hint {
+    margin-top: 1rem;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.75;
+  }
+
+  /* --- stats --------------------------------------------------------------- */
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    margin-top: clamp(3rem, 7vw, 5rem);
+    background: var(--ink-line);
+    border: 2px solid var(--ink-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .stat {
+    padding: 1.5rem 1.25rem;
+    background: var(--ink-raised);
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--yellow);
+  }
+
+  .stat-label {
+    margin: 0.5rem 0 0;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    color: var(--muted);
+    text-wrap: balance;
+  }
+
+  @media (min-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+
+    .stats {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>

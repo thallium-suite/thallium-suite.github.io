@@ -1,0 +1,245 @@
+---
+import { features, images } from '../data/site';
+import ImageIcon from './ImageIcon.astro';
+---
+
+<section id="images" class="section container">
+  <div class="section-head">
+    <p class="eyebrow">The catalogue</p>
+    <h2 class="section-title">
+      Pick your <span class="hl-blue">base</span>
+    </h2>
+    <p class="lede">
+      Every image is a standalone artifact. Start from one of these, or pin a digest and
+      build on top of it.
+    </p>
+  </div>
+
+  <ul class="feature-grid">
+    {features.map((f) => (
+      <li class={`feature feature-${f.accent}`}>
+        <span class="feature-bar" aria-hidden="true" />
+        <h3 class="feature-title">{f.title}</h3>
+        <p class="feature-body">{f.body}</p>
+      </li>
+    ))}
+  </ul>
+
+  <ul class="image-table">
+    {images.map((img) => (
+      <li class="image-row">
+        <span class={`row-icon row-${img.accent}`}>
+          <ImageIcon name={img.icon} />
+        </span>
+        <div class="row-main">
+          <h3 class="row-name">{img.name}</h3>
+          <p class="row-tag">{img.tagline}</p>
+        </div>
+        <code class="row-ref">{img.ref}</code>
+        <span class="row-meta">{img.size}</span>
+        <span class="row-meta row-arches">{img.arches.join(' · ')}</span>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .section-head {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+    margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .hl-blue {
+    color: var(--blue);
+  }
+
+  /* --- feature grid -------------------------------------------------------- */
+
+  .feature-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .feature {
+    --accent: var(--blue);
+    display: grid;
+    gap: 0.6rem;
+    padding: 1.5rem 1.4rem;
+    background: var(--ink-raised);
+    border: 2px solid var(--ink-line);
+    border-radius: var(--radius);
+    transition:
+      translate 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .feature:hover {
+    translate: 0 -4px;
+    border-color: var(--accent);
+  }
+
+  .feature-blue {
+    --accent: var(--blue);
+  }
+  .feature-teal {
+    --accent: var(--teal);
+  }
+  .feature-coral {
+    --accent: var(--coral);
+  }
+  .feature-yellow {
+    --accent: var(--yellow);
+  }
+  .feature-violet {
+    --accent: var(--violet);
+  }
+  .feature-pink {
+    --accent: var(--pink);
+  }
+  .feature-green {
+    --accent: var(--green);
+  }
+
+  .feature-bar {
+    width: 2.5rem;
+    height: 4px;
+    background: var(--accent);
+    border-radius: var(--radius-pill);
+  }
+
+  .feature-title {
+    font-size: 1.2rem;
+  }
+
+  .feature-body {
+    font-size: 0.93rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* --- image table --------------------------------------------------------- */
+
+  .image-table {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    border: 2px solid var(--ink-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .image-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.75rem 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--ink-raised);
+    border-top: 1px solid var(--ink-line);
+  }
+
+  .image-row:first-child {
+    border-top: 0;
+  }
+
+  .image-row:hover {
+    background: #1b2946;
+  }
+
+  .row-icon {
+    --accent: var(--blue);
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--accent);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: var(--radius-sm);
+    flex: none;
+  }
+
+  .row-icon :global(svg) {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .row-blue {
+    --accent: var(--blue);
+  }
+  .row-teal {
+    --accent: var(--teal);
+  }
+  .row-coral {
+    --accent: var(--coral);
+  }
+  .row-yellow {
+    --accent: var(--yellow);
+  }
+  .row-violet {
+    --accent: var(--violet);
+  }
+  .row-pink {
+    --accent: var(--pink);
+  }
+  .row-green {
+    --accent: var(--green);
+  }
+
+  .row-main {
+    min-width: 0;
+  }
+
+  .row-name {
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+
+  .row-tag {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .row-ref {
+    grid-column: 1 / -1;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--teal);
+    word-break: break-all;
+  }
+
+  .row-meta {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  @media (min-width: 860px) {
+    .feature-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .image-row {
+      grid-template-columns: auto minmax(12rem, 1fr) auto auto auto;
+      gap: 1.25rem;
+    }
+
+    .row-ref {
+      grid-column: auto;
+    }
+
+    .row-meta {
+      display: block;
+    }
+
+    .row-arches {
+      min-width: 9rem;
+      text-align: right;
+    }
+  }
+</style>

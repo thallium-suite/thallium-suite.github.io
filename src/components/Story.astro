@@ -1,0 +1,218 @@
+---
+import Button from './Button.astro';
+---
+
+<section id="why" class="section story">
+  <div class="container story-grid">
+    <div class="story-copy">
+      <p class="eyebrow">Why this exists</p>
+      <h2 class="section-title">
+        We get it,
+        <br />
+        <span class="hl-teal">rolling updates ruin everything</span>
+      </h2>
+
+      <div class="prose">
+        <p>
+          You have probably watched a routine security update take down your graphics
+          driver, your audio pipeline, or the one package you actually cared about. Then
+          you spent a Saturday putting it back together.
+        </p>
+        <p>It is not your fault.</p>
+        <p>
+          <strong>
+            Most Linux distributions are mutable trees patched in place, and that model
+            makes every update a gamble. There is no "before" to go back to, only
+            whatever survived.
+          </strong>
+        </p>
+        <p>
+          Atomic images flip the model. The root filesystem is read-only and versioned.
+          An update writes a new snapshot alongside the old one, reboots into it, and if
+          anything is wrong you select the previous deployment from the bootloader.
+          Recovery becomes a menu entry instead of a reinstall.
+        </p>
+        <p>
+          That is the entire idea. Everything else here — the image catalogue,
+          reproducible layers, pinned digests — is in service of making the rollback
+          boring.
+        </p>
+      </div>
+
+      <div class="story-actions">
+        <Button href="#faq" variant="teal">
+          How it works
+        </Button>
+      </div>
+    </div>
+
+    <aside class="story-aside" aria-label="The difference in one line">
+      <div class="compare">
+        <div class="compare-pane compare-old">
+          <h3 class="compare-title">Classic distro</h3>
+          <ul class="compare-list">
+            <li>
+              <span class="x">✕</span> Mutated in place
+            </li>
+            <li>
+              <span class="x">✕</span> One broken state
+            </li>
+            <li>
+              <span class="x">✕</span> Recovery means reinstall
+            </li>
+            <li>
+              <span class="x">✕</span> "Works on my machine"
+            </li>
+          </ul>
+        </div>
+
+        <div class="compare-arrow" aria-hidden="true">
+          →
+        </div>
+
+        <div class="compare-pane compare-new">
+          <h3 class="compare-title">Atomic image</h3>
+          <ul class="compare-list">
+            <li>
+              <span class="tick">✓</span> Snapshots, not patches
+            </li>
+            <li>
+              <span class="tick">✓</span> Previous deployment kept
+            </li>
+            <li>
+              <span class="tick">✓</span> Roll back at boot
+            </li>
+            <li>
+              <span class="tick">✓</span> Pinned, signed digests
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="story-aside-note">
+        Same hardware. Same kernel. Completely different failure model.
+      </p>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .story {
+    background: var(--ink-raised);
+    border-block: 2px solid var(--ink-line);
+  }
+
+  .story-grid {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4rem);
+    align-items: start;
+  }
+
+  .story-copy {
+    display: grid;
+    gap: 1.5rem;
+    justify-items: start;
+  }
+
+  .hl-teal {
+    color: var(--teal);
+  }
+
+  .story-actions {
+    margin-top: 0.5rem;
+  }
+
+  /* --- compare card -------------------------------------------------------- */
+
+  .story-aside {
+    display: grid;
+    gap: 1rem;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    background: var(--ink);
+    border: 3px solid var(--paper);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-paper-md);
+  }
+
+  .compare {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .compare-pane {
+    padding: 1.1rem 1.2rem;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--ink-line);
+  }
+
+  .compare-old {
+    background: #1a1520;
+    border-color: #3a2b33;
+  }
+
+  .compare-new {
+    background: #0f2a26;
+    border-color: #1d4a42;
+  }
+
+  .compare-title {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .compare-old .compare-title {
+    color: var(--coral);
+  }
+  .compare-new .compare-title {
+    color: var(--teal);
+  }
+
+  .compare-list {
+    display: grid;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  .x {
+    display: inline-block;
+    width: 1.1rem;
+    color: var(--coral);
+    font-weight: 700;
+  }
+
+  .tick {
+    display: inline-block;
+    width: 1.1rem;
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  .compare-arrow {
+    display: grid;
+    place-items: center;
+    font-size: 1.4rem;
+    color: var(--muted);
+  }
+
+  .story-aside-note {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.5;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  @media (min-width: 900px) {
+    .story-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .story-aside {
+      position: sticky;
+      top: 2rem;
+    }
+  }
+</style>

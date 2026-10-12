@@ -1,0 +1,58 @@
+---
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Absolute or site-relative path. Falls back to the generated OG image. */
+  image?: string;
+}
+
+const { title, description, image = '/og.png' } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, ''), Astro.site);
+
+const social = {
+  og: { type: 'website', url: canonical.href, title, description, image },
+  twitter: { card: 'summary_large_image', title, description, image },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content={social.og.type} />
+    <meta property="og:url" content={social.og.url} />
+    <meta property="og:title" content={social.og.title} />
+    <meta property="og:description" content={social.og.description} />
+    <meta property="og:image" content={new URL(social.og.image, Astro.site)} />
+
+    <meta name="twitter:card" content={social.twitter.card} />
+    <meta name="twitter:title" content={social.twitter.title} />
+    <meta name="twitter:description" content={social.twitter.description} />
+    <meta name="twitter:image" content={new URL(social.twitter.image, Astro.site)} />
+
+    <meta name="theme-color" content="#0d1626" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script is:inline>
+      // Set before first paint so JS-only affordances never flash.
+      document.documentElement.classList.add('js-ready');
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,188 @@
+---
+/**
+ * The hero centrepiece: a fanned deck of image "stickers" with a draggable
+ * front card.
+ *
+ * Renders completely server-side as a static fan (works with JS disabled);
+ * the script lifts a copy of the front card into a drag layer on top.
+ */
+import { stackOrder } from '../data/site';
+import Sticker from './Sticker.astro';
+
+const front = stackOrder[stackOrder.length - 1]!;
+const depth = 0.22; // em offset per card in the fan
+---
+
+<div class="stack-wrap">
+  <!-- Static fan. Decorative duplicate once the drag layer takes over. -->
+  <ul class="card-stack" style={`--depth:${depth}em`} aria-hidden="true">
+    {stackOrder.map((img, i) => (
+      <li class="card" style={`--i:${i}`}>
+        <Sticker image={img} />
+      </li>
+    ))}
+  </ul>
+
+  <div class="drag-layer" data-drag-layer hidden>
+    <div class="drag-card" data-drag-card>
+      <Sticker image={front} interactive />
+    </div>
+  </div>
+</div>
+
+<script>
+  const MAX_THROW = 220;
+
+  function init(root: HTMLElement) {
+    const layer = root.querySelector<HTMLElement>('[data-drag-layer]')!;
+    const card = root.querySelector<HTMLElement>('[data-drag-card]')!;
+
+    let dragging = false;
+    let startX = 0;
+    let startY = 0;
+    let offX = 0;
+    let offY = 0;
+
+    layer.hidden = false;
+
+    const apply = () => {
+      card.style.transform = `translate(${offX}px, ${offY}px) rotate(${offX * 0.45}deg)`;
+    };
+
+    const settle = () => {
+      card.style.transition = 'transform .32s cubic-bezier(.2,.8,.2,1)';
+      apply();
+    };
+
+    function onDown(e: PointerEvent) {
+      if (e.button !== 0 && e.pointerType === 'mouse') return;
+      dragging = true;
+      startX = e.clientX - offX;
+      startY = e.clientY - offY;
+      card.style.transition = '';
+      card.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    }
+
+    function onMove(e: PointerEvent) {
+      if (!dragging) return;
+      offX = e.clientX - startX;
+      offY = e.clientY - startY;
+      apply();
+    }
+
+    function onUp(e: PointerEvent) {
+      if (!dragging) return;
+      dragging = false;
+      if (card.hasPointerCapture(e.pointerId)) card.releasePointerCapture(e.pointerId);
+
+      if (Math.abs(offX) > MAX_THROW) {
+        // Thrown far enough to count as discarded — spring back to the deck.
+        offX = 0;
+        offY = 0;
+        settle();
+      } else {
+        settle();
+      }
+    }
+
+    card.addEventListener('pointerdown', onDown);
+    card.addEventListener('pointermove', onMove);
+    card.addEventListener('pointerup', onUp);
+    card.addEventListener('pointercancel', onUp);
+
+    // Keyboard equivalent so the interaction is not pointer-only.
+    card.tabIndex = 0;
+    card.addEventListener('keydown', (e) => {
+      const step = e.shiftKey ? 40 : 16;
+      const moves: Record<string, [number, number]> = {
+        ArrowLeft: [-step, 0],
+        ArrowRight: [step, 0],
+        ArrowUp: [0, -step],
+        ArrowDown: [0, step],
+      };
+      const move = moves[e.key];
+      if (!move) return;
+      e.preventDefault();
+      offX = Math.max(-MAX_THROW, Math.min(MAX_THROW, offX + move[0]));
+      offY = Math.max(-160, Math.min(160, offY + move[1]));
+      card.style.transition = 'transform .18s ease-out';
+      apply();
+    });
+    card.addEventListener('blur', () => {
+      if (dragging) return;
+      offX = 0;
+      offY = 0;
+      settle();
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('.stack-wrap').forEach(init);
+</script>
+
+<style>
+  .stack-wrap {
+    position: relative;
+    container-type: inline-size;
+    width: min(100%, 460px);
+    margin-inline: auto;
+    padding: 0.5rem 1rem 1rem 0.5rem;
+  }
+
+  /* --- static fan --------------------------------------------------------- */
+
+  .card-stack {
+    display: grid;
+  }
+
+  .card {
+    grid-area: 1 / 1;
+    width: 100%;
+    aspect-ratio: 1.45 / 1;
+    transform: translate(calc(var(--i) * var(--depth)), calc(var(--i) * var(--depth)));
+    transition: transform 0.25s ease-in-out;
+  }
+
+  /* Fanned cards read as plain colour slabs; only the top one shows content. */
+  .card:not(:last-child) :global(.sticker > *),
+  :global(.js-ready) .card:last-child :global(.sticker > *) {
+    opacity: 0;
+  }
+
+  /* --- drag layer --------------------------------------------------------- */
+
+  .drag-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .drag-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    aspect-ratio: 1.45 / 1;
+    pointer-events: auto;
+    rotate: -3deg;
+    will-change: transform;
+  }
+
+  .drag-card:focus-visible {
+    outline: 3px solid var(--yellow);
+    outline-offset: 6px;
+  }
+
+  @container (min-width: 400px) {
+    .card,
+    .drag-card {
+      aspect-ratio: 1.6 / 1;
+    }
+  }
+
+  /* Once JS is live the static fan is pure decoration. */
+  :global(.js-ready) .card-stack {
+    pointer-events: none;
+  }
+</style>

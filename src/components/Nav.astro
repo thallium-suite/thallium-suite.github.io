@@ -1,0 +1,111 @@
+---
+import Logo from './Logo.astro';
+
+const links = [
+  { href: '/#images', label: 'Images' },
+  { href: '/#why', label: 'Why atomic' },
+  { href: '/#faq', label: 'FAQ' },
+  { href: '/#install', label: 'Install' },
+];
+---
+
+<nav class="nav container" aria-label="Main">
+  <Logo />
+  <ul class="nav-links">
+    {links.map((l) => (
+      <li>
+        <a href={l.href}>{l.label}</a>
+      </li>
+    ))}
+  </ul>
+  <a class="nav-cta" href="/#install">
+    Pull an image
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M2 8h12M9.5 3.5 14 8l-4.5 4.5"></path>
+    </svg>
+  </a>
+</nav>
+
+<style>
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 1.25rem;
+  }
+
+  .nav-links {
+    display: none;
+    gap: 0.25rem;
+    margin-inline-start: auto;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--muted);
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--fg);
+    background: var(--ink-raised);
+  }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.1rem;
+    background: var(--yellow);
+    color: var(--ink);
+    border: var(--border);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    transition:
+      translate 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .nav-cta:hover {
+    translate: 2px 2px;
+    box-shadow: 0 0 0 var(--ink);
+  }
+
+  .nav-cta svg {
+    transition: translate 0.15s ease;
+  }
+
+  .nav-cta:hover svg {
+    translate: 2px 0;
+  }
+
+  @media (min-width: 720px) {
+    .nav-links {
+      display: flex;
+    }
+  }
+</style>

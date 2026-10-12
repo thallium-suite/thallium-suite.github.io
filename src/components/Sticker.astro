@@ -1,0 +1,153 @@
+---
+import ImageIcon from './ImageIcon.astro';
+import type { ImageEntry } from '../data/site';
+
+interface Props {
+  image: ImageEntry;
+  /** Adds a lifted, grabbable treatment. */
+  interactive?: boolean;
+}
+
+const { image, interactive = false } = Astro.props;
+---
+
+<article class:list={['sticker', image.accent, { interactive }]}>
+  <header class="sticker-top">
+    <span class="sticker-ref">
+      {image.ref.replace('ghcr.io/thallium-suite/', 'ts/')}
+    </span>
+    <span class="sticker-dot" aria-hidden="true"></span>
+  </header>
+
+  <div class="sticker-icon">
+    <ImageIcon name={image.icon} />
+  </div>
+
+  <h3 class="sticker-name">{image.name}</h3>
+  <p class="sticker-tag">{image.tagline}</p>
+
+  <footer class="sticker-foot">
+    <span class="sticker-size">{image.size}</span>
+    <span class="sticker-arch">{image.arches.join(' · ')}</span>
+  </footer>
+</article>
+
+<style>
+  .sticker {
+    --accent: var(--blue);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    height: 100%;
+    padding: 0.9rem 1rem 0.8rem;
+    background: var(--accent);
+    color: var(--ink);
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+  }
+
+  .sticker.blue {
+    --accent: var(--blue);
+  }
+  .sticker.teal {
+    --accent: var(--teal);
+  }
+  .sticker.coral {
+    --accent: var(--coral);
+  }
+  .sticker.yellow {
+    --accent: var(--yellow);
+  }
+  .sticker.violet {
+    --accent: var(--violet);
+  }
+  .sticker.pink {
+    --accent: var(--pink);
+  }
+  .sticker.green {
+    --accent: var(--green);
+  }
+
+  .sticker.interactive {
+    cursor: grab;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  .sticker.interactive:active {
+    cursor: grabbing;
+  }
+
+  .sticker-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.02em;
+    opacity: 0.72;
+  }
+
+  .sticker-ref {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .sticker-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    flex: none;
+    background: var(--ink);
+    border-radius: 50%;
+  }
+
+  .sticker-icon {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    min-height: 0;
+  }
+
+  .sticker-icon :global(svg) {
+    width: clamp(38px, 46%, 74px);
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .sticker-name {
+    font-size: clamp(0.95rem, 3.4cqw, 1.35rem);
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .sticker-tag {
+    font-size: clamp(0.62rem, 2.3cqw, 0.78rem);
+    line-height: 1.35;
+    opacity: 0.8;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .sticker-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.2rem;
+    padding-top: 0.45rem;
+    border-top: 2px solid color-mix(in srgb, var(--ink) 28%, transparent);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+</style>

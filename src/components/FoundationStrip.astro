@@ -1,0 +1,107 @@
+---
+import { foundations } from '../data/site';
+---
+
+<section class="strip" aria-label="Technology these images are built on">
+  <p class="strip-label container">Built on components that already work</p>
+
+  <!-- Duplicated once so the marquee can loop seamlessly; the copy is hidden. -->
+  <div class="marquee" data-marquee>
+    <ul class="marquee-track">
+      {foundations.map((f) => (
+        <li class="chip">
+          <span class="chip-name">{f.name}</span>
+          <span class="chip-note">{f.note}</span>
+        </li>
+      ))}
+    </ul>
+    <ul class="marquee-track" aria-hidden="true">
+      {foundations.map((f) => (
+        <li class="chip">
+          <span class="chip-name">{f.name}</span>
+          <span class="chip-note">{f.note}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .strip {
+    padding-block: clamp(2.5rem, 6vw, 4rem) 0;
+  }
+
+  .strip-label {
+    margin-bottom: 1.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .marquee {
+    display: flex;
+    gap: 1rem;
+    overflow: hidden;
+    padding-block: 0.75rem;
+    /* Feather the edges so chips fade in and out of frame. */
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .marquee-track {
+    display: flex;
+    flex: none;
+    gap: 1rem;
+    min-width: 100%;
+    justify-content: space-around;
+    animation: scroll 38s linear infinite;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .chip {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.85rem 1.4rem;
+    background: var(--ink-raised);
+    border: 2px solid var(--ink-line);
+    border-radius: var(--radius);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .chip-name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--paper);
+  }
+
+  .chip-note {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+  }
+
+  @keyframes scroll {
+    to {
+      transform: translateX(calc(-100% - 1rem));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+
+    .marquee {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+</style>

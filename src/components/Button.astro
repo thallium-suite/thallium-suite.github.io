@@ -1,0 +1,112 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'blue' | 'teal' | 'coral' | 'yellow' | 'outlined';
+  size?: 'small' | 'large';
+  class?: string;
+  type?: 'button' | 'submit';
+  [key: string]: unknown;
+}
+
+const { href, variant = 'blue', size, class: className, ...rest } = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+const classes = ['button', variant, size, className].filter(Boolean).join(' ');
+---
+
+<Tag
+  class={classes}
+  {...(href ? { href } : { type: rest.type ?? 'button' })}
+  {...(!href ? rest : {})}
+>
+  <slot />
+</Tag>
+
+<style>
+  .button {
+    --btn-bg: var(--blue);
+    display: inline-block;
+    padding: 0.9em 1.9em;
+    background-color: var(--btn-bg);
+    border: var(--border);
+    border-radius: var(--radius-pill);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition:
+      translate 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out,
+      transform 0.15s ease-in-out;
+  }
+
+  .button::selection {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .button:hover {
+    translate: 2px 2px;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+
+  .button:active {
+    translate: 6px 6px;
+    box-shadow: 0 0 0 var(--ink);
+  }
+
+  .button.large {
+    padding: 1.1em 2.4em;
+    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  }
+
+  .button.small {
+    padding: 0.5em 1.1em;
+    font-size: 0.78rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .button.blue {
+    --btn-bg: var(--blue);
+  }
+  .button.teal {
+    --btn-bg: var(--teal);
+  }
+  .button.coral {
+    --btn-bg: var(--coral);
+  }
+  .button.yellow {
+    --btn-bg: var(--yellow);
+  }
+
+  .button.outlined {
+    background-color: transparent;
+    border-color: var(--paper);
+    color: var(--paper);
+    box-shadow: var(--shadow-paper-md);
+  }
+
+  .button.outlined:hover {
+    background-color: var(--paper);
+    color: var(--ink);
+    box-shadow: var(--shadow-paper-sm);
+  }
+
+  .button:active {
+    translate: 6px 6px;
+    box-shadow: 0 0 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .button:hover,
+    .button:active {
+      translate: none;
+    }
+  }
+</style>

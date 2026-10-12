@@ -1,0 +1,157 @@
+---
+import Logo from './Logo.astro';
+
+const year = new Date().getFullYear();
+
+const columns = [
+  {
+    title: 'Images',
+    links: [
+      { label: 'Uranium', href: '/#images' },
+      { label: 'Registry', href: 'https://ghcr.io/thallium-suite' },
+    ],
+  },
+  {
+    title: 'Docs',
+    links: [
+      { label: 'Getting started', href: '/#install' },
+      { label: 'Why atomic', href: '/#why' },
+      { label: 'FAQ', href: '/#faq' },
+    ],
+  },
+  {
+    title: 'Project',
+    links: [
+      { label: 'Source', href: 'https://github.com/thallium-suite' },
+      { label: 'Registry', href: 'https://ghcr.io/thallium-suite' },
+      {
+        label: 'Issues',
+        href: 'https://github.com/thallium-suite/thallium-suite.github.io/issues',
+      },
+    ],
+  },
+];
+---
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <Logo />
+      <p class="footer-blurb">
+        Bootable, versioned Linux images built as OCI artifacts. Pull one from the
+        registry, write it to disk, boot it.
+      </p>
+    </div>
+
+    {columns.map((col) => (
+      <nav class="footer-col" aria-label={col.title}>
+        <h2 class="footer-title">{col.title}</h2>
+        <ul>
+          {col.links.map((l) => (
+            <li>
+              <a href={l.href}>{l.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    ))}
+  </div>
+
+  <div class="container footer-bottom">
+    <p>&copy; {year} Thallium Suite. Content licensed CC BY 4.0.</p>
+    <p class="footer-fine">
+      <span class="footer-dot" aria-hidden="true"></span>
+      Open source, fork freely.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-top: var(--section-gap);
+    padding-block: clamp(2.5rem, 5vw, 3.5rem) 1.5rem;
+    background: var(--ink-raised);
+    border-top: 3px solid var(--ink-line);
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .footer-brand {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+    max-width: 38ch;
+  }
+
+  .footer-blurb {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .footer-col {
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+  }
+
+  .footer-title {
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  .footer-col ul {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .footer-col a {
+    font-size: 0.9rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .footer-col a:hover {
+    color: var(--paper);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--ink-line);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  .footer-fine {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    background: var(--green);
+    border-radius: 50%;
+  }
+
+  @media (min-width: 720px) {
+    .footer-grid {
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+</style>

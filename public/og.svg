@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1626"/>
+      <stop offset="1" stop-color="#16223a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- faint grid -->
+  <g stroke="#25334f" stroke-width="1" opacity=".5">
+    <path d="M0 126h1200M0 252h1200M0 378h1200M0 504h1200"/>
+    <path d="M200 0v630M400 0v630M600 0v630M800 0v630M1000 0v630"/>
+  </g>
+
+  <!-- card stack motif, right -->
+  <g transform="translate(790 175) rotate(-6)">
+    <rect width="250" height="168" rx="14" fill="#ffc83d" stroke="#0d1626" stroke-width="7"/>
+    <g transform="translate(26 26) rotate(6)">
+      <rect width="250" height="168" rx="14" fill="#ff6a4d" stroke="#0d1626" stroke-width="7"/>
+    </g>
+    <g transform="translate(52 52) rotate(12)">
+      <rect width="250" height="168" rx="14" fill="#2f6fed" stroke="#0d1626" stroke-width="7"/>
+      <g stroke="#f6f4ec" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" transform="translate(86 44)">
+        <rect width="78" height="52" rx="8"/>
+        <path d="M28 68h22M39 52v16"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- wordmark -->
+  <g transform="translate(72 96)">
+    <g fill="none" stroke="#1fc9b6" stroke-width="6" stroke-linejoin="round">
+      <path d="M0 -34 34 -14v40L0 46l-34-20v-40L0 -34Z" transform="translate(34 4) scale(.72)"/>
+      <path d="M0 -14 34 6l34-20" transform="translate(34 4) scale(.72)" opacity=".5"/>
+      <path d="M34 6v40" transform="translate(34 4) scale(.72)" opacity=".5"/>
+    </g>
+    <circle cx="34" cy="4" r="9" fill="#ffc83d"/>
+  </g>
+
+  <text x="72" y="252" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="#9aabc9" letter-spacing="1">thallium.tarxz.zip</text>
+
+  <g font-family="Helvetica, Arial, sans-serif" font-weight="bold" fill="#f6f4ec">
+    <text x="72" y="336" font-size="82" letter-spacing="-2">ATOMIC LINUX,</text>
+    <text x="72" y="422" font-size="82" letter-spacing="-2">SHIPPED AS A</text>
+  </g>
+  <text x="72" y="508" font-family="Helvetica, Arial, sans-serif" font-weight="bold" font-size="82" letter-spacing="-2" fill="#1fc9b6">CONTAINER.</text>
+
+  <text x="72" y="566" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#9aabc9" letter-spacing="1">bootc &#183; ostree &#183; OCI &#183; rollback in one reboot</text>
+</svg>

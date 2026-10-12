@@ -1,0 +1,143 @@
+---
+import { reviews } from '../data/site';
+import Button from './Button.astro';
+---
+
+<section class="section reviews-section">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">From the field</p>
+      <h2 class="section-title">
+        Quiet machines,
+        <br />
+        <span class="hl-yellow">loud opinions</span>
+      </h2>
+    </div>
+
+    <ul class="reviews">
+      {reviews.map((r) => (
+        <li class="review">
+          <blockquote class="review-quote">
+            <p>&ldquo;{r.quote}&rdquo;</p>
+          </blockquote>
+          <cite class="review-handle">{r.handle}</cite>
+        </li>
+      ))}
+    </ul>
+
+    <div class="cta panel">
+      <h3 class="cta-title">Stop patching. Start pulling.</h3>
+      <p class="cta-body">
+        Grab an image, write it to a stick, and find out how boring a rollback can be.
+      </p>
+      <div class="cta-actions">
+        <Button href="#install" variant="yellow" size="large">
+          Pull an image
+        </Button>
+        <Button href="#images" variant="outlined" size="large">
+          Browse catalogue
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews-section {
+    padding-bottom: 0;
+  }
+
+  .section-head {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .hl-yellow {
+    color: var(--yellow);
+  }
+
+  .reviews {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .review {
+    display: grid;
+    gap: 1rem;
+    align-content: space-between;
+    padding: 1.6rem 1.5rem;
+    background: var(--ink-raised);
+    border: 2px solid var(--ink-line);
+    border-left: 5px solid var(--yellow);
+    border-radius: var(--radius);
+  }
+
+  .review-quote p {
+    font-size: 1.02rem;
+    line-height: 1.6;
+    color: var(--paper);
+  }
+
+  .review-handle {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-style: normal;
+  }
+
+  /* --- final CTA ----------------------------------------------------------- */
+
+  .cta {
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    padding: clamp(2rem, 5vw, 3.5rem);
+    text-align: center;
+    background: var(--blue);
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .cta-title {
+    font-size: clamp(1.9rem, 5vw, 3.25rem);
+    text-transform: uppercase;
+  }
+
+  .cta-body {
+    margin-block: 1rem 2rem;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    max-width: 48ch;
+    margin-inline: auto;
+    color: color-mix(in srgb, var(--ink) 78%, var(--paper));
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .cta :global(.button.outlined) {
+    border-color: var(--ink);
+    color: var(--ink);
+    box-shadow: var(--shadow-md);
+  }
+
+  .cta :global(.button.outlined:hover) {
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .cta :global(.button.yellow) {
+    background: var(--yellow);
+  }
+
+  @media (min-width: 760px) {
+    .reviews {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

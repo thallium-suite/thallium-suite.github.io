@@ -1,0 +1,61 @@
+---
+/** Wordmark lockup for thallium suite */
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<a class:list={['logo', className]} href="/" aria-label="thallium suite home">
+  <img
+    class="logo-mark"
+    src="/assets/logo.svg"
+    width="44"
+    height="44"
+    alt=""
+    aria-hidden="true"
+  />
+  <span class="logo-word">
+    <span class="logo-name">thallium suite</span>
+  </span>
+</a>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+    color: var(--fg);
+  }
+
+  .logo:hover .logo-mark {
+    rotate: -8deg;
+  }
+
+  .logo-mark {
+    width: 44px;
+    height: 44px;
+    transition: rotate 0.3s ease;
+    flex: none;
+  }
+
+  .logo-word {
+    line-height: 1;
+  }
+
+  .logo-name {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-transform: lowercase;
+  }
+
+  @media (hover: hover) {
+    .logo:hover .logo-name {
+      color: var(--yellow);
+    }
+  }
+</style>
