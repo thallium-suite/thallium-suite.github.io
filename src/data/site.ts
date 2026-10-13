@@ -24,6 +24,16 @@ export type ImageEntry = {
  */
 export const images: readonly ImageEntry[] = [
   {
+    ref: 'ghcr.io/thallium-suite/lithium',
+    name: 'Lithium',
+    tagline:
+      'Lightweight server for the homelab. CentOS Stream 10 base with the coreos-stable kernel. Optional sysexts for k0s, KubeStellar and Docker.',
+    accent: 'yellow',
+    icon: 'server',
+    size: '1.4 GB',
+    arches: ['x86_64', 'aarch64'],
+  },
+  {
     ref: 'ghcr.io/thallium-suite/uranium',
     name: 'Uranium',
     tagline:
@@ -50,7 +60,7 @@ export const foundations: readonly { readonly name: string; readonly note: strin
   ] as const;
 
 export const stats: readonly { readonly value: string; readonly label: string }[] = [
-  { value: '1', label: 'Images published' },
+  { value: '2', label: 'Images published' },
   { value: '< 8s', label: 'Median rollback' },
   { value: '100%', label: 'Rebootless updates' },
   { value: '0', label: 'Unsupported CVEs older than 24h' },
