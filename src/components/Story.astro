@@ -7,34 +7,36 @@ import Button from './Button.astro';
     <div class="story-copy">
       <p class="eyebrow">Why this exists</p>
       <h2 class="section-title">
-        We get it,
+        It's a commonly known fact that
         <br />
-        <span class="hl-teal">rolling updates ruin everything</span>
+        <span class="hl-teal">rolling release updates can ruin everything.</span>
       </h2>
 
       <div class="prose">
         <p>
-          You have probably watched a routine security update take down your graphics
-          driver, your audio pipeline, or the one package you actually cared about. Then
-          you spent a Saturday putting it back together.
+          You have probably experienced a routine update take down your graphics
+          driver, or your audio pipeline, or the one app your big hobby uses. Then
+          you spent a whole day putting it back together.
         </p>
-        <p>It is not your fault.</p>
+        <p>It's not your fault.</p>
         <p>
           <strong>
-            Most Linux distributions are mutable trees patched in place, and that model
-            makes every update a gamble. There is no "before" to go back to, only
-            whatever survived.
+            Most Linux distrobutions are mutable systems that are patched in place,
+            and that method makes every update unpridictable. There is no before or backup
+            to go back to, unless you manually set it up.
           </strong>
         </p>
         <p>
-          Atomic images flip the model. The root filesystem is read-only and versioned.
+          Atomic images are safer: The root filesystem is read-only, versioned, and has
+          no in-between state. Updates write new snapshots, and you just reboot into it.
+          If anything goes wrong, you just select the old entry from the bootloader with just
+          a few keypresses at boot, and you're back in action.
           An update writes a new snapshot alongside the old one, reboots into it, and if
-          anything is wrong you select the previous deployment from the bootloader.
-          Recovery becomes a menu entry instead of a reinstall.
         </p>
         <p>
-          That is the entire idea. Everything else here — the image catalogue,
-          reproducible layers, pinned digests — is in service of making the rollback
+          The Thallium Suite is a collection of unique atomic distros: a catalogue of images
+          usable with bootc, a system that lets you boot from said containers with
+          reproducible layers and easy atomic rollbacks.
           boring.
         </p>
       </div>
@@ -52,13 +54,13 @@ import Button from './Button.astro';
           <h3 class="compare-title">Classic distro</h3>
           <ul class="compare-list">
             <li>
-              <span class="x">✕</span> Mutated in place
+              <span class="x">✕</span> In between updates
             </li>
             <li>
-              <span class="x">✕</span> One broken state
+              <span class="x">✕</span> Broken states
             </li>
             <li>
-              <span class="x">✕</span> Recovery means reinstall
+              <span class="x">✕</span> Recovery means reinstall or 5 hours
             </li>
             <li>
               <span class="x">✕</span> "Works on my machine"
@@ -74,23 +76,23 @@ import Button from './Button.astro';
           <h3 class="compare-title">Atomic image</h3>
           <ul class="compare-list">
             <li>
-              <span class="tick">✓</span> Snapshots, not patches
+              <span class="tick">✓</span> Snapshots rebooted into and out of
             </li>
             <li>
-              <span class="tick">✓</span> Previous deployment kept
+              <span class="tick">✓</span> Previous deployment kept safe
             </li>
             <li>
-              <span class="tick">✓</span> Roll back at boot
+              <span class="tick">✓</span> Roll back at boot easily
             </li>
             <li>
-              <span class="tick">✓</span> Pinned, signed digests
+              <span class="tick">✓</span> Pinned and signed digests
             </li>
           </ul>
         </div>
       </div>
 
       <p class="story-aside-note">
-        Same hardware. Same kernel. Completely different failure model.
+        Same hardware and kernel, but a completely different failure model.
       </p>
     </aside>
   </div>

@@ -27,7 +27,7 @@ export const images: readonly ImageEntry[] = [
     ref: 'ghcr.io/thallium-suite/uranium',
     name: 'Uranium',
     tagline:
-      'LTS desktop on CentOS Stream 10. Conservative upgrades, extended support.',
+      'LTS desktop on CentOS Stream 10.',
     accent: 'green',
     icon: 'shield',
     size: '1.8 GB',
@@ -120,12 +120,12 @@ export const faqs: readonly { readonly q: string; readonly a: string }[] = [
 export const reviews: readonly { readonly quote: string; readonly handle: string }[] = [
   {
     quote:
-      'Rolled the workstation image onto four lab machines over a weekend. Nobody noticed, which is the highest compliment an OS can get.',
-    handle: '@john-thallium',
+      'it works!',
+    handle: 'YOU! (please send us a review or feedback)',
   },
   {
     quote:
-      'I broke a toolchain update on the old setup and lost an afternoon. Here the rollback is a bootloader entry. That is the whole pitch.',
-    handle: '@dan-thallium',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lacinia ut ante ultricies tempus. Nulla facilisi. Nulla ipsum velit, tincidunt sit amet fringilla vitae, egestas ac elit. Fusce in rutrum sapien. Aenean hendrerit ac leo fermentum tempus. Vivamus vulputate scelerisque mi sed pharetra. Suspendisse iaculis ipsum eget tellus hendrerit, non maximus nibh ullamcorper. Aenean commodo elementum dolor. Nam tristique diam lectus, et mollis mi varius non. Mauris a purus non mauris ultrices scelerisque. Suspendisse ac lacinia massa.',
+    handle: 'random latin speaker (we do not know what it means)',
   },
 ] as const;
