@@ -101,7 +101,7 @@ export const faqs: readonly { readonly q: string; readonly a: string }[] = [
   },
   {
     q: 'Do I need a tool I have never heard of?',
-    a: 'No. Your image is a standard OCI artifact. Pull it with podman or docker, then write it to disk with bootc — the same tool Fedora is adopting for CoreOS, and already used by its bootc images. If you can run a container, you can install an OS.',
+    a: 'No. Your image is a standard OCI artifact. Pull it with podman or docker, then write it to disk with bootc — the same tool Fedora is adopting for Hummingbird, and already used by its bootc images. If you can run a container, you can install an OS.',
   },
   {
     q: 'Can I still install packages?',

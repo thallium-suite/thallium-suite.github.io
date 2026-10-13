@@ -42,20 +42,24 @@ import { foundations } from '../data/site';
 
   .marquee {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
     overflow: hidden;
-    padding-block: 0.75rem;
-    /* Feather the edges so chips fade in and out of frame. */
+    padding: 0.7rem 1rem;
+    background: var(--ink-raised);
+    border: 2px solid var(--ink-line);
+    border-radius: var(--radius);
+    /* Fade edges so chips dissolve in and out of frame. */
     mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   }
 
   .marquee-track {
     display: flex;
     flex: none;
-    gap: 1rem;
+    gap: 0.5rem;
     min-width: 100%;
     justify-content: space-around;
-    animation: scroll 38s linear infinite;
+    animation: scroll 30s linear infinite;
   }
 
   .marquee:hover .marquee-track {
@@ -63,20 +67,24 @@ import { foundations } from '../data/site';
   }
 
   .chip {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    padding: 0.85rem 1.4rem;
-    background: var(--ink-raised);
-    border: 2px solid var(--ink-line);
-    border-radius: var(--radius);
-    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
     white-space: nowrap;
+  }
+
+  .chip:not(:last-child)::after {
+    content: "";
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--muted);
+    flex: none;
   }
 
   .chip-name {
     font-family: var(--font-display);
-    font-size: 1.05rem;
+    font-size: 0.8rem;
     font-weight: 800;
     letter-spacing: -0.01em;
     color: var(--paper);
@@ -84,13 +92,13 @@ import { foundations } from '../data/site';
 
   .chip-note {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.55rem;
     color: var(--muted);
   }
 
   @keyframes scroll {
     to {
-      transform: translateX(calc(-100% - 1rem));
+      transform: translateX(calc(-100% - 0.5rem));
     }
   }
 
